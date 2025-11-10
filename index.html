@@ -6,18 +6,18 @@
   <title>Noah Mohsin — Developer</title>
   <style>
     :root{
-      --bg: linear-gradient(135deg, #0a0b0d 0%, #1a1c20 100%);
-      --accent: linear-gradient(135deg,#4cc9f0 0%, #4361ee 50%, #7209b7 100%);
-      --glass: rgba(255,255,255,0.05);
-      --muted: rgba(255,255,255,0.7);
-      --radius: 10px;
+      --bg: linear-gradient(135deg, #050506 0%, #0d0e10 100%);
+      --accent: linear-gradient(135deg,#3a86ff 0%, #8338ec 50%, #ff006e 100%);
+      --glass: rgba(255,255,255,0.03);
+      --muted: rgba(200,200,200,0.65);
+      --radius: 5px;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
     body{
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       background: var(--bg);
-      color:#fff;
+      color:#f2f2f2;
       display:flex;
       min-height:100vh;
       overflow:hidden;
@@ -25,37 +25,42 @@
 
     /* Sidebar */
     .sidebar{
-      width:200px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-      backdrop-filter: blur(20px) saturate(180%);
-      border-right:1px solid rgba(255,255,255,0.08);
-      padding:24px 16px;
+      width:210px;
+      background:linear-gradient(180deg, rgba(10,10,10,0.7), rgba(20,20,20,0.5));
+      backdrop-filter: blur(40px) saturate(180%);
+      border-right:1px solid rgba(255,255,255,0.06);
+      box-shadow:inset 0 1px rgba(255,255,255,0.05), 0 0 40px rgba(0,0,0,0.7);
+      padding:20px 12px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
     }
 
     .menu h2{
-      font-size:16px;
-      margin-bottom:24px;
+      font-size:15px;
+      margin-bottom:16px;
       font-weight:600;
       text-align:center;
+      letter-spacing:0.4px;
+      color:#fff;
     }
 
     .menu a{
-      display:block;
-      padding:10px 12px;
-      margin-bottom:8px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      margin-bottom:2px;
       border-radius:var(--radius);
       text-decoration:none;
       color:var(--muted);
       background:transparent;
-      transition:all .3s ease;
+      transition:all .25s ease;
       font-weight:500;
       font-size:14px;
     }
     .menu a:hover{
-      background:var(--glass);
+      background:rgba(255,255,255,0.08);
       color:#fff;
     }
 
@@ -63,6 +68,8 @@
       text-align:center;
       font-size:12px;
       color:var(--muted);
+      padding-top:10px;
+      border-top:1px solid rgba(255,255,255,0.05);
     }
 
     /* Main */
@@ -80,8 +87,8 @@
       content:'';
       position:absolute;
       inset:0;
-      background: radial-gradient(circle at 30% 30%, #4cc9f0 0%, transparent 40%), radial-gradient(circle at 70% 70%, #7209b7 0%, transparent 40%);
-      filter:blur(180px);
+      background: radial-gradient(circle at 30% 30%, #3a86ff 0%, transparent 40%), radial-gradient(circle at 70% 70%, #8338ec 0%, transparent 40%);
+      filter:blur(280px);
       opacity:0.45;
       z-index:0;
     }
@@ -89,24 +96,26 @@
     .content{
       position:relative;
       z-index:1;
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      backdrop-filter: blur(30px) saturate(180%);
+      background:rgba(15,15,15,0.6);
+      backdrop-filter: blur(55px) saturate(200%);
       border:1px solid rgba(255,255,255,0.08);
       border-radius:var(--radius);
-      padding:40px 60px;
-      box-shadow:0 8px 24px rgba(0,0,0,0.5);
+      padding:34px 50px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.65);
     }
 
     h1{
-      font-size:42px;
+      font-size:34px;
       font-weight:700;
       margin-bottom:6px;
+      letter-spacing:-0.3px;
+      color:#fff;
     }
     h2{
-      font-size:18px;
+      font-size:16px;
       font-weight:400;
       color:var(--muted);
-      margin-bottom:24px;
+      margin-bottom:20px;
     }
 
     .btn{
@@ -117,18 +126,18 @@
       color:#fff;
       text-decoration:none;
       font-weight:600;
-      font-size:14px;
+      font-size:13px;
       transition:transform .2s ease;
     }
-    .btn:hover{transform:translateY(-3px)}
+    .btn:hover{transform:translateY(-2px)}
 
     @media(max-width:900px){
-      .sidebar{width:70px;padding:20px 10px}
+      .sidebar{width:70px;padding:16px 8px}
       .menu h2{display:none}
-      .menu a{padding:8px;margin-bottom:6px;text-align:center;font-size:13px}
+      .menu a{padding:8px;margin-bottom:4px;text-align:center;font-size:13px}
       .main{padding:20px}
-      .content{padding:30px 20px}
-      h1{font-size:32px}
+      .content{padding:28px 18px}
+      h1{font-size:28px}
     }
   </style>
 </head>
