@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Apple-style Glass Landing — Single File</title>
+  <meta name="description" content="Minimal single-file landing page with frosted glass, blur, and Apple-like typography." />
+  <style>
+    /* ---------- Variables ---------- */
+    :root{
+      --bg-1: linear-gradient(135deg, rgba(10,11,13,1) 0%, rgba(26,28,32,1) 100%);
+      --accent: linear-gradient(135deg,#4cc9f0 0%, #4361ee 50%, #7209b7 100%);
+      --glass: rgba(255,255,255,0.06);
+      --glass-2: rgba(255,255,255,0.08);
+      --glass-3: rgba(255,255,255,0.04);
+      --muted: rgba(255,255,255,0.7);
+      --radius: 16px;
+      --fw-heading: 600;
+    }
+
+    /* ---------- Base ---------- */
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg-1);
+      color: #fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+      padding:40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+    }
+
+    /* ---------- Subtle animated backdrop shapes ---------- */
+    .bg-shapes{
+      position:fixed;inset:0;pointer-events:none;z-index:0;mix-blend-mode:screen;
+      overflow:hidden;
+    }
+    .shape{
+      position:absolute;border-radius:50%;filter:blur(80px);opacity:0.6;transform:translate3d(0,0,0);
+      animation: float 10s ease-in-out infinite;
+    }
+    .shape.s1{width:520px;height:520px;background:radial-gradient(circle at 30% 30%, #4cc9f0, transparent 40%);left:-120px;top:-60px}
+    .shape.s2{width:420px;height:420px;background:radial-gradient(circle at 70% 70%, #7209b7, transparent 40%);right:-100px;bottom:-80px;animation-duration:14s}
+    .shape.s3{width:280px;height:280px;background:radial-gradient(circle at 40% 60%, #4361ee, transparent 40%);left:40%;top:10%;animation-duration:12s}
+    @keyframes float{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(-20px) translateX(12px)}100%{transform:translateY(0) translateX(0)}}
+
+    /* ---------- Container ---------- */
+    .wrap{
+      width:100%;max-width:1100px;z-index:1;display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;
+    }
+
+    /* ---------- Left / Hero ---------- */
+    .hero{
+      padding:36px;border-radius:22px;background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      backdrop-filter: blur(10px) saturate(150%);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
+      border:1px solid rgba(255,255,255,0.06);
+      box-shadow:0 10px 30px rgba(2,6,23,0.6);
+    }
+    .nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#fff,#fff);
+      background-clip:padding-box;box-shadow:0 6px 18px rgba(0,0,0,0.45);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center
+    }
+    .logo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0.08));mix-blend-mode:overlay;}
+    .brand h4{margin:0;font-size:14px;font-weight:700;letter-spacing:0.6px}
+    .brand p{margin:0;font-size:12px;color:var(--muted);margin-top:2px}
+
+    h1{font-size:44px;margin:0 0 10px 0;font-weight:var(--fw-heading);line-height:1.02}
+    p.lead{color:var(--muted);margin:0 0 26px 0;max-width:56ch}
+
+    .cta-row{display:flex;gap:14px;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));cursor:pointer;font-weight:600;text-decoration:none
+    }
+    .btn.primary{background:var(--accent);background-size:200% 200%;color:#fff;border:0;padding-left:20px;padding-right:20px}
+    .btn.ghost{background:transparent;color:var(--muted)}
+    .btn:active{transform:translateY(1px)}
+
+    /* ---------- Right / Panel ---------- */
+    .panel{
+      padding:26px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      backdrop-filter: blur(8px) saturate(150%);-webkit-backdrop-filter: blur(8px) saturate(150%);
+      border:1px solid rgba(255,255,255,0.06);
+      box-shadow:0 8px 30px rgba(2,6,23,0.6);
+    }
+    .stat{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .stat .name{font-size:13px;color:var(--muted)}
+    .stat .value{font-weight:700}
+
+    /* ---------- Card List (small glass elements) ---------- */
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+    .card{padding:12px;border-radius:12px;background:var(--glass);border:1px solid rgba(255,255,255,0.04);backdrop-filter: blur(6px)}
+    .small{font-size:12px;color:var(--muted)}
+
+    /* ---------- Footer ---------- */
+    .footer{margin-top:18px;color:var(--muted);font-size:13px}
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:980px){
+      .wrap{grid-template-columns:1fr;}
+      body{padding:22px}
+      h1{font-size:36px}
+    }
+
+    /* ---------- Micro interactions ---------- */
+    .logo, .card, .btn{transition:transform 220ms ease, box-shadow 220ms ease}
+    .logo:hover{transform:translateY(-4px) scale(1.02)}
+    .card:hover{transform:translateY(-6px)}
+    .btn.primary:hover{transform:translateY(-3px)}
+
+  </style>
+</head>
+<body>
+  <div class="bg-shapes" aria-hidden="true">
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+    <div class="shape s3"></div>
+  </div>
+
+  <div class="wrap" role="main">
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="nav">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <!-- simple apple-ish glyph -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M16.365 2.28c-.9.05-2.06.64-2.73 1.44-.6.72-1.13 1.86-.94 2.94 1.02.08 2.08-.52 2.73-1.33.62-.77 1.06-1.92.9-3.05z" fill="#fff" opacity="0.9"/>
+              <path d="M12.04 6.14c-1.4 0-3.3.94-4.23 1.94-1.78 1.94-3.65 6.5-1.5 10.7 1 1.84 2.2 3.9 4.14 3.9 1.86 0 2.3-1.22 4.33-1.22 2.02 0 2.3 1.22 4.31 1.22 1.95 0 3.15-2.06 4.16-3.9 1.9-3.94.6-7.56-.8-9.2-1.76-2.1-4.48-2.82-6.95-2.82-1.1 0-2.05.2-2.73.5z" fill="#fff" opacity="0.95"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Orchard</h4>
+            <p>Frosted UI Kit</p>
+          </div>
+        </div>
+        <nav aria-label="primary">
+          <a class="small" href="#" style="color:var(--muted);text-decoration:none;margin-right:14px">Features</a>
+          <a class="small" href="#" style="color:var(--muted);text-decoration:none">Docs</a>
+        </nav>
+      </div>
+
+      <h1 id="hero-title">A simple, glassy landing page<br/>that breathes.</h1>
+      <p class="lead">A single-file example using system fonts, backdrop-filter blur, soft gradients and subtle motion — inspired by modern Apple design language. Drop in your content and go.</p>
+
+      <div class="cta-row">
+        <a class="btn primary" href="#">Get started</a>
+        <a class="btn ghost" href="#">View demo</a>
+      </div>
+
+      <div class="footer" role="contentinfo">Built with <strong>backdrop-filter</strong>. Works best in modern browsers (Safari, Chrome, Edge). Use autoprefixers for older support.</div>
+    </section>
+
+    <aside class="panel" aria-labelledby="panel-title">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div>
+          <h3 id="panel-title" style="margin:0;font-size:16px">Overview</h3>
+          <p class="small" style="margin:6px 0 0 0;color:var(--muted)">Quick stats & controls</p>
+        </div>
+        <div style="font-size:12px;color:var(--muted)">v1.0</div>
+      </div>
+
+      <div class="stat"><div class="name">Users</div><div class="value">12.1K</div></div>
+      <div class="stat"><div class="name">Active</div><div class="value">3.2K</div></div>
+
+      <div class="cards">
+        <div class="card">
+          <div style="font-weight:700">Themes</div>
+          <div class="small">Light & dark-ready glass layers</div>
+        </div>
+        <div class="card">
+          <div style="font-weight:700">Components</div>
+          <div class="small">Buttons, cards, nav, hero</div>
+        </div>
+        <div class="card">
+          <div style="font-weight:700">Performance</div>
+          <div class="small">GPU-friendly animations</div>
+        </div>
+        <div class="card">
+          <div style="font-weight:700">Accessibility</div>
+          <div class="small">Readable font sizes & contrast</div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px;display:flex;gap:10px">
+        <button class="btn" onclick="downloadExample()">Download HTML</button>
+        <button class="btn ghost" onclick="copyHTML()">Copy to clipboard</button>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <script>
+    // Small helpers: copy/download the current HTML source (this file) for convenience.
+    function copyHTML(){
+      const html = `<!doctype html>\n${document.documentElement.outerHTML}`;
+      navigator.clipboard.writeText(html).then(()=>{
+        alert('Page HTML copied to clipboard');
+      }).catch(()=>alert('Copy failed — your browser may block clipboard access'));
+    }
+
+    function downloadExample(){
+      const blob = new Blob([ '<!doctype html>\n' + document.documentElement.outerHTML ],{type:'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'apple-glass-landing.html'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
